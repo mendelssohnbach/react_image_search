@@ -11,6 +11,7 @@ function App() {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const fetchImages = useCallback(async () => {
     try {
@@ -23,9 +24,11 @@ function App() {
         console.log('data', data);
         setImages(data.results);
         setTotalPages(data.total_pages);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }, [page]);
 
@@ -70,20 +73,26 @@ function App() {
         <div onClick={() => handleSelection('cats')}>Cats</div>
         <div onClick={() => handleSelection('shoes')}>Shoes</div>
       </div>
-      <div className="images">
-        {images.map((image) => (
-          <img
-            key={image.id}
-            src={image.urls.small}
-            alt={image.alt_description}
-            className="image"
-          />
-        ))}
-      </div>
-      <div className="buttons">
-        {page > 1 && <Button onClick={() => setPage(page - 1)}>Previous</Button>}
-        {page < totalPages && <Button onClick={() => setPage(page + 1)}>Next</Button>}
-      </div>
+      {loading ? (
+        <p className="loading">Loading...</p>
+      ) : (
+        <>
+          <div className="images">
+            {images.map((image) => (
+              <img
+                key={image.id}
+                src={image.urls.small}
+                alt={image.alt_description}
+                className="image"
+              />
+            ))}
+          </div>
+          <div className="buttons">
+            {page > 1 && <Button onClick={() => setPage(page - 1)}>Previous</Button>}
+            {page < totalPages && <Button onClick={() => setPage(page + 1)}>Next</Button>}
+          </div>
+        </>
+      )}
     </div>
   );
 }
