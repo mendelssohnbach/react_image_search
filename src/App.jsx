@@ -1,8 +1,10 @@
-import React from 'react';
+import { useRef } from 'react';
 import './index.css';
 import { Form } from 'react-bootstrap';
 
 const App = () => {
+  const searchInput = useRef(null);
+
   return (
     <div className="container">
       <h1 className="title">Image Search</h1>
@@ -12,6 +14,7 @@ const App = () => {
             type="search"
             placeholder="Type something to search..."
             className="search-input"
+            ref={searchInput}
           />
         </Form>
       </div>
