@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     fetchImages();
-  }, [fetchImages, page]);
+  }, [fetchImages]);
 
   const resetSearch = () => {
     setPage(1);
