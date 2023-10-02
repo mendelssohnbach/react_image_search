@@ -10,6 +10,10 @@ function App() {
     console.log(searchInput.current.value);
   };
 
+  const handleSelection = (selection) => {
+    searchInput.current.value = selection;
+  };
+
   return (
     <div className="container">
       <h1 className="title">Image Search</h1>
@@ -22,6 +26,12 @@ function App() {
             ref={searchInput}
           />
         </Form>
+      </div>
+      <div className="filters">
+        <div onClick={() => handleSelection('nature')}>Nature</div>
+        <div onClick={() => handleSelection('birds')}>Birds</div>
+        <div onClick={() => handleSelection('cats')}>Cats</div>
+        <div onClick={() => handleSelection('shoes')}>Shoes</div>
       </div>
     </div>
   );
